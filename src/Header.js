@@ -1,22 +1,20 @@
 import React from "react";
-import WeatherForecast from "./WeatherForecast";
+import "./Header.css";
 
 export default function Header() {
   return (
-    <div>
+    <div className="Header">
       <form>
         <input
           type="text"
           placeholder="Enter a city..."
-          className="plain-border search-city-input"
+          className="search-city-input"
           autoComplete="off"
           autoFocus="on"
         />
 
-        <button type="submit">Search</button>
+        <input type="submit" value="Search" />
       </form>
-
-      <WeatherForecast />
     </div>
   );
 }
