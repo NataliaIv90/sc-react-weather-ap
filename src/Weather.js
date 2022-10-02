@@ -3,60 +3,103 @@ import "./Weather.css";
 import axios from "axios";
 
 export default function Weather() {
-  let [city, setCity] = useState("");
+  const apiKey = "428ced130c91866c290ad7f8a9bb8995";
+  let units = "metric";
+  const [city, setCity] = useState("Kyiv");
   let [loaded, setLoaded] = useState(false);
-
-  let weatherData = {
-    temperature: 5,
-    windSpeed: 25,
-    hymidity: 75,
-    clouds: 15,
-    icon: `https://ssl.gstatic.com/onebox/weather/64/cloudy.png`,
-    time: "12:50",
-    city: "Kyiv",
-  };
+  let [weatherData, setWeatherData] = useState("");
 
   function changeCity(event) {
     setCity(event.target.value);
   }
 
+  function setDate() {
+    let now = new Date();
+
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+
+    const months = [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
+    ];
+
+    return (
+      <ul>
+        <li>
+          {now.getDate()} {months[now.getMonth()]} {now.getFullYear()}
+        </li>
+        <li>
+          {days[now.getDay()]} {now.getHours()}:{now.getMinutes()}
+        </li>
+      </ul>
+    );
+  }
+
   function getData(responce) {
-    console.log(responce);
+    setWeatherData({
+      temperature: Math.round(responce.data.main.temp),
+      windSpeed: Math.round(responce.data.wind.speed),
+      hymidity: responce.data.main.humidity,
+      clouds: responce.data.clouds.all,
+      icon: `http://openweathermap.org/img/wn/${responce.data.weather[0].icon}@2x.png`,
+      time: setDate(responce.data.timezone),
+      city: responce.data.name,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    showWeather();
   }
 
   function showWeather(event) {
-    event.preventDefault();
-    let apiKey = "428ced130c91866c290ad7f8a9bb8995";
-    let units = "metric";
-    let apiUrl = `api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`;
     setLoaded(true);
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(getData);
     console.log(apiUrl);
   }
 
   const headerForm = (
-    <form onSubmit={showWeather}>
-      <input
-        type="text"
-        placeholder="Enter a city..."
-        className="search-city-input"
-        autoComplete="off"
-        autoFocus="on"
-        onChange={changeCity}
-      />
+    <div className="Header">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter a city..."
+          className="search-city-input"
+          autoComplete="off"
+          autoFocus="on"
+          onChange={changeCity}
+        />
 
-      <input type="submit" value="Search" />
-    </form>
+        <input type="submit" value="Search" />
+      </form>
+    </div>
   );
 
   const mainSection = (
     <div className="Main">
       <div className="cityInfo">
         <h1>{weatherData.city}</h1>
-        <ul className="dateInfo">
-          <li>Monday, 21:50</li>
-          <li> ${weatherData.time}</li>
-        </ul>
+        <div className="dateInfo">{weatherData.time}</div>
       </div>
 
       <div className="weatherDetails">
@@ -165,9 +208,15 @@ export default function Weather() {
     </div>
   );
 
+  const loadingForecastSection = (
+    <div className="Main">
+      <p>Waiting for data input...</p>
+    </div>
+  );
+
   if (loaded) {
     return (
-      <div className="Header">
+      <div className="Waether">
         {headerForm}
         {mainSection}
         {forecastSection}
@@ -175,10 +224,9 @@ export default function Weather() {
     );
   } else {
     return (
-      <div className="Header">
+      <div className="Waether">
         {headerForm}
-        {mainSection}
-        {forecastSection}
+        {loadingForecastSection}
       </div>
     );
   }
