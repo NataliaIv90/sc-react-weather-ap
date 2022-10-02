@@ -1,0 +1,178 @@
+.Header {
+  max-width: 450px;
+  display: block;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.Header form {
+  max-width: 100%;
+}
+
+.Header input {
+  font-size: 14px;
+  margin: 5px;
+  border: 0.1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.Header input[type="text"] {
+  width: 250px;
+}
+
+.Header input[type="submit"] {
+  width: 70px;
+  color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(256, 256, 256, 0.9);
+
+  transition: all 150ms ease-in;
+}
+
+.Header input[type="submit"]:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(256, 256, 256, 0.9);
+}
+
+.Main {
+  display: block;
+  color: rgba(256, 256, 256, 0.8);
+  margin: 0 auto;
+  max-width: 450px;
+  border: 0.5px solid rgba(256, 256, 256, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.Main ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.Main li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.Main h1 {
+  margin: 15px 0 20px 20px;
+  padding: 0px;
+  font-size: 38px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.Main .dateInfo {
+  margin: 0 0 30px 20px;
+  padding: 0px;
+  text-align: left;
+  color: rgba(256, 256, 256, 0.5);
+}
+
+.Main .weatherDetails {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Main .leftPart,
+.Main .rightPart {
+  width: 50%;
+}
+
+.Main .leftPart {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+
+.Main .rightPart {
+  font-size: 16px;
+}
+
+.Main .iconWrapper,
+.Main .temperatureWrapper {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.Main .icon {
+  margin: 0 auto;
+  padding: 0;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.Main h2 {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  vertical-align: middle;
+  line-height: 48px;
+  font-size: 48px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 500;
+}
+
+.Main h2 .temperatureScale {
+  font-size: 16px;
+  vertical-align: super;
+}
+
+.Main a {
+  text-decoration: none;
+  color: rgba(256, 256, 256, 0.4);
+}
+
+.Main a:hover,
+.Main .active {
+  color: rgba(256, 256, 256, 0.9);
+}
+
+.FutureForecast {
+  display: block;
+  color: rgba(256, 256, 256, 0.8);
+  margin: 0 auto;
+  max-width: 450px;
+  border: 0.5px solid rgba(256, 256, 256, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin-top: 15px;
+  font-size: 16px;
+  color: rgba(256, 256, 256, 0.6);
+}
+
+.FutureForecast ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.FutureForecast .day {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 20%;
+  display: inline-block;
+  transition: all 150ms ease-in;
+}
+
+.FutureForecast .day:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.FutureForecast .weekDay {
+  font-size: 20px;
+  color: rgba(256, 256, 256, 0.9);
+}
+
+.FutureForecast .date,
+.FutureForecast .max {
+  margin-bottom: 5px;
+}

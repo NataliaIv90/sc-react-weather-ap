@@ -1,10 +1,11 @@
 import React from "react";
+import "./Footer.css";
 
 export default function Footer() {
   return (
     <div className="Footer">
       <p>
-        Open-source
+        Open-source{" "}
         <a
           href="https://github.com/NataliaIv90/sc-react-weather-ap"
           target="_blank"
@@ -12,8 +13,8 @@ export default function Footer() {
           className="footer-link"
         >
           code
-        </a>
-        by
+        </a>{" "}
+        by{" "}
         <a
           href="https://www.linkedin.com/in/natalia-ivantsova-46017b238/"
           target="_blank"

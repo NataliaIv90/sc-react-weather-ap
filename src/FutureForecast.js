@@ -13,9 +13,9 @@ export default function FutureForecast() {
               src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
               alt="weather icon"
             />
-            <li className="temperature min">+5℃</li>
-            <li className="temperature max">+15℃</li>
           </li>
+          <li className="temperature min">+5℃</li>
+          <li className="temperature max">+15℃</li>
         </ul>
         <ul className="day">
           <li className="weekDay">mon</li>
@@ -25,9 +25,9 @@ export default function FutureForecast() {
               src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
               alt="weather icon"
             />
-            <li className="temperature min">+5℃</li>
-            <li className="temperature max">+15℃</li>
           </li>
+          <li className="temperature min">+5℃</li>
+          <li className="temperature max">+15℃</li>
         </ul>
         <ul className="day">
           <li className="weekDay">mon</li>
@@ -37,9 +37,9 @@ export default function FutureForecast() {
               src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
               alt="weather icon"
             />
-            <li className="temperature min">+5℃</li>
-            <li className="temperature max">+15℃</li>
           </li>
+          <li className="temperature min">+5℃</li>
+          <li className="temperature max">+15℃</li>
         </ul>
         <ul className="day">
           <li className="weekDay">mon</li>
@@ -49,9 +49,9 @@ export default function FutureForecast() {
               src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
               alt="weather icon"
             />
-            <li className="temperature min">+5℃</li>
-            <li className="temperature max">+15℃</li>
           </li>
+          <li className="temperature min">+5℃</li>
+          <li className="temperature max">+15℃</li>
         </ul>
         <ul className="day">
           <li className="weekDay">mon</li>
@@ -61,9 +61,9 @@ export default function FutureForecast() {
               src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
               alt="weather icon"
             />
-            <li className="temperature min">+5℃</li>
-            <li className="temperature max">+15℃</li>
           </li>
+          <li className="temperature min">+5℃</li>
+          <li className="temperature max">+15℃</li>
         </ul>
       </ul>
     </div>

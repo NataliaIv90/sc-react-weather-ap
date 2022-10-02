@@ -1,0 +1,8 @@
+.Footer {
+  text-align: center;
+  color: rgba(256, 256, 256, 0.2);
+}
+
+.Footer a {
+  color: rgba(256, 256, 256, 0.4);
+}
