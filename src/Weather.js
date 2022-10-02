@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Weather.css";
+import axios from "axios";
 
 export default function Weather() {
   let [city, setCity] = useState("");
@@ -19,14 +20,22 @@ export default function Weather() {
     setCity(event.target.value);
   }
 
-  function alertCity(event) {
-    setLoaded(true);
+  function getData(responce) {
+    console.log(responce);
+  }
+
+  function showWeather(event) {
     event.preventDefault();
-    alert(city);
+    let apiKey = "428ced130c91866c290ad7f8a9bb8995";
+    let units = "metric";
+    let apiUrl = `api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`;
+    setLoaded(true);
+    axios.get(apiUrl).then(getData);
+    console.log(apiUrl);
   }
 
   const headerForm = (
-    <form onSubmit={alertCity}>
+    <form onSubmit={showWeather}>
       <input
         type="text"
         placeholder="Enter a city..."
