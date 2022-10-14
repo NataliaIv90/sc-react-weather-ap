@@ -209,11 +209,11 @@ export default function Weather() {
     </div>
   );
 
-  const loadingForecastSection = (
-    <div className="Main">
-      <p>Waiting for data input...</p>
-    </div>
-  );
+  // const loadingForecastSection = (
+  //   <div className="Main">
+  //     <p>Waiting for data input...</p>
+  //   </div>
+  // );
 
   if (loaded) {
     return (
