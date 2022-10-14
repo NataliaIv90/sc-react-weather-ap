@@ -64,6 +64,7 @@ export default function Weather() {
       time: setDate(responce.data.timezone),
       city: responce.data.name,
     });
+    setLoaded(true);
   }
 
   function handleSubmit(event) {
@@ -223,11 +224,14 @@ export default function Weather() {
       </div>
     );
   } else {
-    return (
-      <div className="Waether">
-        {headerForm}
-        {loadingForecastSection}
-      </div>
-    );
+    showWeather();
+
+    // Loading form without default city forecast loading
+    // return (
+    //   <div className="Waether">
+    //     {headerForm}
+    //     {loadingForecastSection}
+    //   </div>
+    // );
   }
 }
