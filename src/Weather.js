@@ -225,7 +225,7 @@ export default function Weather() {
     );
   } else {
     showWeather();
-
+    return "Loading...";
     // Loading form without default city forecast loading
     // return (
     //   <div className="Waether">
