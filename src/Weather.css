@@ -94,18 +94,18 @@
   font-size: 16px;
 }
 
-.Main .iconWrapper,
+/* .Main .iconWrapper, */
 .Main .temperatureWrapper {
   display: inline;
   margin: 0;
   padding: 0;
 }
 
-.Main .icon {
-  margin: 0 auto;
+.Main .iconWrapper {
+  display: inline;
   padding: 0;
-  height: 64px;
-  margin-right: 10px;
+  height: 42px;
+  margin: 5px 10px 0 0;
 }
 
 .Main h2 {

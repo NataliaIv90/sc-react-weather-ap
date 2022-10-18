@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
+import WeatherIcon from "./WeatherIcon";
 
 export default function Weather() {
   const apiKey = "428ced130c91866c290ad7f8a9bb8995";
@@ -60,9 +61,11 @@ export default function Weather() {
       windSpeed: Math.round(responce.data.wind.speed),
       hymidity: responce.data.main.humidity,
       clouds: responce.data.clouds.all,
-      icon: `http://openweathermap.org/img/wn/${responce.data.weather[0].icon}@2x.png`,
+      description: responce.data.weather[0].description,
+      iconCode: responce.data.weather[0].icon,
       time: setDate(responce.data.timezone),
       city: responce.data.name,
+      // date: new Date(responce.data.dt * 1000),
     });
     setLoaded(true);
   }
@@ -101,12 +104,15 @@ export default function Weather() {
       <div className="cityInfo">
         <h1>{weatherData.city}</h1>
         <div className="dateInfo">{weatherData.time}</div>
+        
       </div>
 
       <div className="weatherDetails">
+        
+
         <div className="leftPart">
           <div className="iconWrapper">
-            <img className="icon" src={weatherData.icon} alt="weather icon" />
+            <WeatherIcon iconCode={weatherData.iconCode}/>
           </div>
           <div className="temperatureWrapper">
             <h2>
@@ -122,7 +128,7 @@ export default function Weather() {
               </span>
             </h2>
           </div>
-        </div>
+                </div>
 
         <div className="rightPart">
           <ul>
@@ -221,6 +227,7 @@ export default function Weather() {
         {headerForm}
         {mainSection}
         {forecastSection}
+
       </div>
     );
   } else {
