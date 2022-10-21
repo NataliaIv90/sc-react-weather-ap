@@ -11,8 +11,7 @@ export default function Weather() {
   const [city, setCity] = useState("Kyiv");
   let [loaded, setLoaded] = useState(false);
   let [weatherData, setWeatherData] = useState("");
-
-
+  let [windUnits, setWindUnits] = useState("km/h");
   function changeCity(event) {
     setCity(event.target.value);
   }
@@ -70,7 +69,7 @@ export default function Weather() {
       city: responce.data.name,
       // date: new Date(responce.data.dt * 1000),
     });
-    setLoaded(true);
+    units === "metric" ? setWindUnits("km/h") : setWindUnits("m/h");
   }
 
   function handleSubmit(event) {
@@ -88,13 +87,13 @@ export default function Weather() {
   function faehrTemp(event) {
     event.preventDefault();
     units = "imperial";
-     showWeather();
+    showWeather();
   }
 
-function celsTemp(event) {
+  function celsTemp(event) {
     event.preventDefault();
     units = "metric";
-     showWeather();
+    showWeather();
   }
 
   const headerForm = (
@@ -119,32 +118,36 @@ function celsTemp(event) {
       <div className="cityInfo">
         <h1>{weatherData.city}</h1>
         <div className="dateInfo">{weatherData.time}</div>
-        
       </div>
 
       <div className="weatherDetails">
-        
-
         <div className="leftPart">
           <div className="iconWrapper">
-            <WeatherIcon iconCode={weatherData.iconCode}/>
+            <WeatherIcon iconCode={weatherData.iconCode} />
           </div>
           <div className="temperatureWrapper">
             <h2>
               <span className="temperature">{weatherData.temperature}</span>
               <span className="temperatureScale">
-                <a href="/" className="scaleLink active celciusLink" onClick={celsTemp} >
-                
+                <a
+                  href="/"
+                  className="scaleLink active celciusLink"
+                  onClick={celsTemp}
+                >
                   ℃
                 </a>
                 |
-                <a href="/" className="scaleLink fahrenheitLink" onClick={faehrTemp}>
+                <a
+                  href="/"
+                  className="scaleLink fahrenheitLink"
+                  onClick={faehrTemp}
+                >
                   ℉
                 </a>
               </span>
             </h2>
           </div>
-                </div>
+        </div>
 
         <div className="rightPart">
           <ul>
@@ -153,7 +156,7 @@ function celsTemp(event) {
             </li>
             <li>
               Wind: <span className="wind">{weatherData.windSpeed} </span>
-              <span id="wind-speed-units">km/h</span>
+              <span id="wind-speed-units"> {windUnits}</span>
             </li>
             <li>
               Humidity: <span id="hymidity">{weatherData.hymidity} </span>%
@@ -162,8 +165,7 @@ function celsTemp(event) {
         </div>
       </div>
     </div>
-  )
-  
+  );
 
   const forecastSection = (
     <div className="FutureForecast">
@@ -234,19 +236,16 @@ function celsTemp(event) {
     </div>
   );
 
-
-
   if (loaded) {
     return (
       <div className="Waether">
         {headerForm}
         {mainSection}
         {forecastSection}
-
       </div>
     );
   } else {
     showWeather();
     return "Loading...";
-     }
+  }
 }
