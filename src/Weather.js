@@ -3,12 +3,15 @@ import "./Weather.css";
 import axios from "axios";
 import WeatherIcon from "./WeatherIcon";
 
+// import MainSection from "./MainSection";
+
 export default function Weather() {
   const apiKey = "428ced130c91866c290ad7f8a9bb8995";
   let units = "metric";
   const [city, setCity] = useState("Kyiv");
   let [loaded, setLoaded] = useState(false);
   let [weatherData, setWeatherData] = useState("");
+
 
   function changeCity(event) {
     setCity(event.target.value);
@@ -82,6 +85,18 @@ export default function Weather() {
     console.log(apiUrl);
   }
 
+  function faehrTemp(event) {
+    event.preventDefault();
+    units = "imperial";
+     showWeather();
+  }
+
+function celsTemp(event) {
+    event.preventDefault();
+    units = "metric";
+     showWeather();
+  }
+
   const headerForm = (
     <div className="Header">
       <form onSubmit={handleSubmit}>
@@ -118,11 +133,12 @@ export default function Weather() {
             <h2>
               <span className="temperature">{weatherData.temperature}</span>
               <span className="temperatureScale">
-                <a href="/" className="scaleLink active celciusLink">
+                <a href="/" className="scaleLink active celciusLink" onClick={celsTemp} >
+                
                   ℃
                 </a>
                 |
-                <a href="/" className="scaleLink fahrenheitLink">
+                <a href="/" className="scaleLink fahrenheitLink" onClick={faehrTemp}>
                   ℉
                 </a>
               </span>
@@ -146,11 +162,12 @@ export default function Weather() {
         </div>
       </div>
     </div>
-  );
+  )
+  
 
   const forecastSection = (
     <div className="FutureForecast">
-      <ul>
+      {/* <ul>
         <ul className="day">
           <li className="weekDay">mon</li>
           <li className="date">13.09</li>
@@ -211,15 +228,13 @@ export default function Weather() {
           <li className="temperature min">+5℃</li>
           <li className="temperature max">+15℃</li>
         </ul>
-      </ul>
+      </ul> */}
+      <p>Here will be forecast for 5 || 6 days</p>
+      <p>I'm currently working on it</p>
     </div>
   );
 
-  // const loadingForecastSection = (
-  //   <div className="Main">
-  //     <p>Waiting for data input...</p>
-  //   </div>
-  // );
+
 
   if (loaded) {
     return (
@@ -233,12 +248,5 @@ export default function Weather() {
   } else {
     showWeather();
     return "Loading...";
-    // Loading form without default city forecast loading
-    // return (
-    //   <div className="Waether">
-    //     {headerForm}
-    //     {loadingForecastSection}
-    //   </div>
-    // );
-  }
+     }
 }
