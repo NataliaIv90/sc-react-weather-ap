@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
 import WeatherIcon from "./WeatherIcon";
+import Forecast from "./Forecast";
 
 // import MainSection from "./MainSection";
 
 export default function Weather() {
-  const apiKey = "428ced130c91866c290ad7f8a9bb8995";
-  let units = "metric";
   const [city, setCity] = useState("Kyiv");
   let [loaded, setLoaded] = useState(false);
   let [weatherData, setWeatherData] = useState("");
-  let [windUnits, setWindUnits] = useState("km/h");
+  let [forecastData, setForecastData] = useState("");
+
   function changeCity(event) {
     setCity(event.target.value);
   }
@@ -59,17 +59,20 @@ export default function Weather() {
 
   function getData(responce) {
     setWeatherData({
-      temperature: Math.round(responce.data.main.temp),
+      temperature: Math.round(responce.data.temperature.current),
       windSpeed: Math.round(responce.data.wind.speed),
-      hymidity: responce.data.main.humidity,
-      clouds: responce.data.clouds.all,
-      description: responce.data.weather[0].description,
-      iconCode: responce.data.weather[0].icon,
-      time: setDate(responce.data.timezone),
-      city: responce.data.name,
-      // date: new Date(responce.data.dt * 1000),
+      hymidity: responce.data.temperature.humidity,
+      description: responce.data.condition.description,
+      iconCode: responce.data.condition.icon,
+      time: setDate(responce.data.time),
+      city: responce.data.city,
+      country: responce.data.country,
     });
-    units === "metric" ? setWindUnits("km/h") : setWindUnits("m/h");
+  }
+
+  function getForecastData(responce) {
+    setForecastData(responce.data.daily);
+    console.log(forecastData);
   }
 
   function handleSubmit(event) {
@@ -77,23 +80,12 @@ export default function Weather() {
     showWeather();
   }
 
-  function showWeather(event) {
+  function showWeather() {
     setLoaded(true);
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+    const forecastApiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=60e7tc4c9f70d174aa0f4647b8bao3f3`;
+    axios.get(forecastApiUrl).then(getForecastData);
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=60e7tc4c9f70d174aa0f4647b8bao3f3`;
     axios.get(apiUrl).then(getData);
-    console.log(apiUrl);
-  }
-
-  function faehrTemp(event) {
-    event.preventDefault();
-    units = "imperial";
-    showWeather();
-  }
-
-  function celsTemp(event) {
-    event.preventDefault();
-    units = "metric";
-    showWeather();
   }
 
   const headerForm = (
@@ -116,7 +108,9 @@ export default function Weather() {
   const mainSection = (
     <div className="Main">
       <div className="cityInfo">
-        <h1>{weatherData.city}</h1>
+        <h1>
+          {weatherData.city}, {weatherData.country}
+        </h1>
         <div className="dateInfo">{weatherData.time}</div>
       </div>
 
@@ -128,111 +122,23 @@ export default function Weather() {
           <div className="temperatureWrapper">
             <h2>
               <span className="temperature">{weatherData.temperature}</span>
-              <span className="temperatureScale">
-                <a
-                  href="/"
-                  className="scaleLink active celciusLink"
-                  onClick={celsTemp}
-                >
-                  ℃
-                </a>
-                |
-                <a
-                  href="/"
-                  className="scaleLink fahrenheitLink"
-                  onClick={faehrTemp}
-                >
-                  ℉
-                </a>
-              </span>
+              <span className="temperatureScale">℃</span>
             </h2>
           </div>
         </div>
 
         <div className="rightPart">
           <ul>
+            <li>{weatherData.description}</li>
             <li>
-              Clouds: <span className="clouds">{weatherData.clouds} </span>%
+              wind: <span className="wind">{weatherData.windSpeed} km/h</span>
             </li>
             <li>
-              Wind: <span className="wind">{weatherData.windSpeed} </span>
-              <span id="wind-speed-units"> {windUnits}</span>
-            </li>
-            <li>
-              Humidity: <span id="hymidity">{weatherData.hymidity} </span>%
+              humidity: <span id="hymidity">{weatherData.hymidity} </span>%
             </li>
           </ul>
         </div>
       </div>
-    </div>
-  );
-
-  const forecastSection = (
-    <div className="FutureForecast">
-      {/* <ul>
-        <ul className="day">
-          <li className="weekDay">mon</li>
-          <li className="date">13.09</li>
-          <li className="icon">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
-              alt="weather icon"
-            />
-          </li>
-          <li className="temperature min">+5℃</li>
-          <li className="temperature max">+15℃</li>
-        </ul>
-        <ul className="day">
-          <li className="weekDay">mon</li>
-          <li className="date">13.09</li>
-          <li className="icon">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
-              alt="weather icon"
-            />
-          </li>
-          <li className="temperature min">+5℃</li>
-          <li className="temperature max">+15℃</li>
-        </ul>
-        <ul className="day">
-          <li className="weekDay">mon</li>
-          <li className="date">13.09</li>
-          <li className="icon">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
-              alt="weather icon"
-            />
-          </li>
-          <li className="temperature min">+5℃</li>
-          <li className="temperature max">+15℃</li>
-        </ul>
-        <ul className="day">
-          <li className="weekDay">mon</li>
-          <li className="date">13.09</li>
-          <li className="icon">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
-              alt="weather icon"
-            />
-          </li>
-          <li className="temperature min">+5℃</li>
-          <li className="temperature max">+15℃</li>
-        </ul>
-        <ul className="day">
-          <li className="weekDay">mon</li>
-          <li className="date">13.09</li>
-          <li className="icon">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
-              alt="weather icon"
-            />
-          </li>
-          <li className="temperature min">+5℃</li>
-          <li className="temperature max">+15℃</li>
-        </ul>
-      </ul> */}
-      <p>Here will be forecast for 5 || 6 days</p>
-      <p>I'm currently working on it</p>
     </div>
   );
 
@@ -241,7 +147,7 @@ export default function Weather() {
       <div className="Waether">
         {headerForm}
         {mainSection}
-        {forecastSection}
+        <Forecast data={forecastData} />
       </div>
     );
   } else {

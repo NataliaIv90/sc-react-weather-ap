@@ -136,11 +136,12 @@
 
 .FutureForecast {
   display: block;
+  text-align: center;
   color: rgba(256, 256, 256, 0.8);
   margin: 0 auto;
   max-width: 450px;
   border: 0.5px solid rgba(256, 256, 256, 0.8);
-  padding: 10px;
+  padding: 10px 5px;
   border-radius: 5px;
   font-family: "Courier New", Courier, monospace;
   background-color: rgba(0, 0, 0, 0.4);
@@ -171,6 +172,14 @@
 .FutureForecast .weekDay {
   font-size: 20px;
   color: rgba(256, 256, 256, 0.9);
+}
+
+.FutureForecast .temperature {
+  font-size: 15px;
+}
+
+.FutureForecast .max {
+  opacity: 0.8;
 }
 
 .FutureForecast .date,
