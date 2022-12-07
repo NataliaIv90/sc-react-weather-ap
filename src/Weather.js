@@ -10,7 +10,6 @@ export default function Weather() {
   const [city, setCity] = useState("Kyiv");
   let [loaded, setLoaded] = useState(false);
   let [weatherData, setWeatherData] = useState("");
-  let [forecastData, setForecastData] = useState("");
 
   function changeCity(event) {
     setCity(event.target.value);
@@ -20,14 +19,14 @@ export default function Weather() {
     let now = new Date();
 
     const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+      "sunday",
     ];
 
     const months = [
@@ -70,11 +69,6 @@ export default function Weather() {
     });
   }
 
-  function getForecastData(responce) {
-    setForecastData(responce.data.daily);
-    console.log(forecastData);
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     showWeather();
@@ -82,8 +76,7 @@ export default function Weather() {
 
   function showWeather() {
     setLoaded(true);
-    const forecastApiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=60e7tc4c9f70d174aa0f4647b8bao3f3`;
-    axios.get(forecastApiUrl).then(getForecastData);
+
     const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=60e7tc4c9f70d174aa0f4647b8bao3f3`;
     axios.get(apiUrl).then(getData);
   }
@@ -108,9 +101,7 @@ export default function Weather() {
   const mainSection = (
     <div className="Main">
       <div className="cityInfo">
-        <h1>
-          {weatherData.city}, {weatherData.country}
-        </h1>
+        <h1>{weatherData.city}</h1>
         <div className="dateInfo">{weatherData.time}</div>
       </div>
 
@@ -147,7 +138,7 @@ export default function Weather() {
       <div className="Waether">
         {headerForm}
         {mainSection}
-        <Forecast data={forecastData} />
+        <Forecast city={city} />
       </div>
     );
   } else {
