@@ -67,7 +67,7 @@ export default function Weather() {
       hymidity: responce.data.temperature.humidity,
       description: responce.data.condition.description,
       iconCode: responce.data.condition.icon,
-      time: setDate(responce.data.time),
+      // time: setDate(responce.data.time),
       cityName: responce.data.city,
       time: responce.data.time,
     });

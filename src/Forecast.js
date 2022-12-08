@@ -34,7 +34,7 @@ export default function Forecast(props) {
         {forecastData.map(function (dailyForecast, index) {
           if (index > 0 && index < 6) {
             return (
-              <div>
+              <div key={index}>
                 <ul className="day">
                   <li className="weekDay">{setDay(dailyForecast)}</li>
                   <li className="icon">
