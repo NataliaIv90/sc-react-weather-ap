@@ -3,6 +3,7 @@ import "./Weather.css";
 import axios from "axios";
 import WeatherIcon from "./WeatherIcon";
 import Forecast from "./Forecast";
+import { InfinitySpin } from "react-loader-spinner";
 
 // import MainSection from "./MainSection";
 
@@ -15,8 +16,8 @@ export default function Weather() {
     setCity(event.target.value);
   }
 
-  function setDate() {
-    let now = new Date();
+  function setDate(timestamp) {
+    let now = new Date(timestamp * 1000);
 
     const days = [
       "sunday",
@@ -44,13 +45,16 @@ export default function Weather() {
       "december",
     ];
 
+    let minutes =
+      now.getMinutes() < 9 ? `0${now.getMinutes()}` : now.getMinutes();
+
     return (
       <ul>
         <li>
           {now.getDate()} {months[now.getMonth()]} {now.getFullYear()}
         </li>
         <li>
-          {days[now.getDay()]} {now.getHours()}:{now.getMinutes()}
+          {days[now.getDay()]} {now.getHours()}:{minutes}
         </li>
       </ul>
     );
@@ -64,21 +68,22 @@ export default function Weather() {
       description: responce.data.condition.description,
       iconCode: responce.data.condition.icon,
       time: setDate(responce.data.time),
-      city: responce.data.city,
-      country: responce.data.country,
+      cityName: responce.data.city,
+      time: responce.data.time,
     });
+    setLoaded(true);
+  }
+
+  function showWeather() {
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=60e7tc4c9f70d174aa0f4647b8bao3f3`;
+    axios.get(apiUrl).then(getData);
+
+    console.log(weatherData.cityName);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     showWeather();
-  }
-
-  function showWeather() {
-    setLoaded(true);
-
-    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=60e7tc4c9f70d174aa0f4647b8bao3f3`;
-    axios.get(apiUrl).then(getData);
   }
 
   const headerForm = (
@@ -101,8 +106,8 @@ export default function Weather() {
   const mainSection = (
     <div className="Main">
       <div className="cityInfo">
-        <h1>{weatherData.city}</h1>
-        <div className="dateInfo">{weatherData.time}</div>
+        <h1>{weatherData.cityName}</h1>
+        <div className="dateInfo">{setDate(weatherData.time)}</div>
       </div>
 
       <div className="weatherDetails">
@@ -138,11 +143,16 @@ export default function Weather() {
       <div className="Waether">
         {headerForm}
         {mainSection}
-        <Forecast city={city} />
+        <Forecast currentCity={city} apiCity={weatherData.cityName} />
       </div>
     );
   } else {
     showWeather();
-    return "Loading...";
+    return (
+      <div className="Waether">
+        <InfinitySpin width="200" color="#ffffff55" />
+      </div>
+    );
+    // "Loading...";
   }
 }

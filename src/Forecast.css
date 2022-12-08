@@ -1,0 +1,65 @@
+.FutureForecast_loading {
+  display: block;
+  margin: 0 auto;
+}
+
+.FutureForecast {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  color: rgba(256, 256, 256, 0.8);
+  margin: 0 auto;
+  max-width: 450px;
+  border: 0.5px solid rgba(256, 256, 256, 0.8);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin-top: 15px;
+  font-size: 16px;
+  color: rgba(256, 256, 256, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.FutureForecast ul {
+  list-style: none;
+  margin: 0px;
+  padding: 5px;
+  width: 100%;
+}
+
+.FutureForecast .day {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: inline-block;
+  transition: all 150ms ease-in;
+}
+
+.FutureForecast .day:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.FutureForecast .weekDay {
+  font-size: 20px;
+  color: rgba(256, 256, 256, 0.7);
+}
+
+.FutureForecast .icon {
+  margin: 10px 0;
+}
+
+.FutureForecast .temperature {
+  font-size: 14px;
+}
+
+.FutureForecast .max {
+  opacity: 0.8;
+}
+
+.FutureForecast .date,
+.FutureForecast .max {
+  margin-bottom: 5px;
+}
