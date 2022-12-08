@@ -39,11 +39,11 @@ export default function Forecast(props) {
                 <li className="icon">
                   <ForecastIcon iconCode={dailyForecast.condition.icon} />
                 </li>
+                <li className="temperature">
+                  {Math.round(dailyForecast.temperature.minimum)}°
+                </li>{" "}
                 <li className="temperature min">
-                  {Math.round(dailyForecast.temperature.maximum)}°{" "}
-                  <span className="temperature max">
-                    {Math.round(dailyForecast.temperature.minimum)}°
-                  </span>
+                  {Math.round(dailyForecast.temperature.maximum)}°
                 </li>
               </ul>
             </div>

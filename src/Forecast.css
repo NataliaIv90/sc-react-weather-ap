@@ -53,6 +53,8 @@
 
 .FutureForecast .temperature {
   font-size: 14px;
+  line-height: 1.5em;
+  text-align: center;
 }
 
 .FutureForecast .max {
