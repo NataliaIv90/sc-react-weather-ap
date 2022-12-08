@@ -32,24 +32,22 @@ export default function Forecast(props) {
     return (
       <div className="FutureForecast">
         {forecastData.map(function (dailyForecast, index) {
-          if (index < 5) {
-            return (
-              <div key={index}>
-                <ul className="day">
-                  <li className="weekDay">{setDay(dailyForecast)}</li>
-                  <li className="icon">
-                    <ForecastIcon iconCode={dailyForecast.condition.icon} />
-                  </li>
-                  <li className="temperature min">
-                    {Math.round(dailyForecast.temperature.maximum)}°{" "}
-                    <span className="temperature max">
-                      {Math.round(dailyForecast.temperature.minimum)}°
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            );
-          }
+          return (
+            <div key={index}>
+              <ul className="day">
+                <li className="weekDay">{setDay(dailyForecast)}</li>
+                <li className="icon">
+                  <ForecastIcon iconCode={dailyForecast.condition.icon} />
+                </li>
+                <li className="temperature min">
+                  {Math.round(dailyForecast.temperature.maximum)}°{" "}
+                  <span className="temperature max">
+                    {Math.round(dailyForecast.temperature.minimum)}°
+                  </span>
+                </li>
+              </ul>
+            </div>
+          );
         })}
       </div>
     );
